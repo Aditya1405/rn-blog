@@ -6,6 +6,11 @@ import React from 'react'
 const BlogContext = React.createContext()
 //receive a prop from a prop object right here called children ~ props.children
 export const BlogProvider = function({children}){
+    // create a data set blogpost as an array of objects
+    const blogpost = [
+        {title:'BlogPost #1'},
+        {title:'BlogPost #2'}
+    ]
      /**
       * what is children ?
       * -----
@@ -22,7 +27,7 @@ export const BlogProvider = function({children}){
       * displaying inside of our application 
       */
      return(
-         <BlogContext.Provider value={5}>
+         <BlogContext.Provider value={blogpost}>
              {children}
          </BlogContext.Provider>
      )
