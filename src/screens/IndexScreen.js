@@ -20,17 +20,17 @@ const IndexScreen = function(){
     //using hook - useContext
     //this value is equal to the value provided in the blogcontext-blogprovider
     //now we are receiving a an array of objects and for that we need to destructuring
-    const {data,addblogpost} = useContext(BlogContext)
+    const { data, addBlogPost } = useContext(BlogContext);
     return(
         <View>
             <Text>IndexScreen</Text>
             <Button 
                 title="add post"
-                onPress={function(){console.log("************index***********")}}
+                onPress={function(){addBlogPost()}}
             />
             <FlatList
                 data={data}
-                keyExtractor={(k)=>k.title}
+                keyExtractor={k=>k.title}
                 renderItem={function({item}){
                     return(
                         <Text>{item.title}</Text>
