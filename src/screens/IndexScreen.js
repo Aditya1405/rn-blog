@@ -16,6 +16,7 @@ import BlogContext from '../context/BlogContext'
  * create a fnction that returns jsx
  */
 const IndexScreen = function(){
+    console.log("help")
     //using hook - useContext
     //this value is equal to the value provided in the blogcontext-blogprovider
     //now we are receiving a an array of objects and for that we need to destructuring
@@ -23,7 +24,10 @@ const IndexScreen = function(){
     return(
         <View>
             <Text>IndexScreen</Text>
-            <Button title="add post" onPress={function(){addblogpost()}}/>
+            <Button 
+                title="add post"
+                onPress={function(){console.log("************index***********")}}
+            />
             <FlatList
                 data={data}
                 keyExtractor={(k)=>k.title}

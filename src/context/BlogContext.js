@@ -1,16 +1,30 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 /**
  * think of this object as pipe of sort
  * this object is responsible for directly transmiting data from parent to child
  */
 const BlogContext = React.createContext()
+//state = blogpost
+const BlogReducer = function(state,action){
+    switch(action.type){
+        case 'add_blogpost':
+            if(true){
+                return([...state,{title:`BlogPost${state.length+1}`}])
+            }
+            
+        default:
+            return(state)
+
+    }
+}
 //receive a prop from a prop object right here called children ~ props.children
 export const BlogProvider = function({children}){
+    console.log("******************************blogcontext********************************************")
     // create a data set blogpost as an array of objects
-    const [blogpost,setblogpost]=useState([])
+    const [blogposts,dispatch] = useReducer(BlogReducer,[])
     //creating a helper function to set blog post
     const addblogpost=function(){
-        setblogpost([...blogpost,{title:`BlogPost${blogpost.length+1}`}])
+        dispatch({type:'add_blogpost'})
     }
      /**
       * what is children ?
@@ -21,14 +35,14 @@ export const BlogProvider = function({children}){
       * what is BlogContext.Provider ?
       * ----
       * 
-      * ----
+      * ----  
       * since we have exported 'app' from app.js from inside the fxn
       * so blogprovider is wrapping or showing the react stack navigator inside of 
       * it which therefore includes all the other screens and components that we're
       * displaying inside of our application 
       */
      return(
-         <BlogContext.Provider value={{data:blogpost,addblogpost:addblogpost}}>
+         <BlogContext.Provider value={{data:blogposts,addblogpost:addblogpost()}}>
              {children}
          </BlogContext.Provider>
      )
