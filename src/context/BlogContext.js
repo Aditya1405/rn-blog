@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 /**
  * think of this object as pipe of sort
  * this object is responsible for directly transmiting data from parent to child
@@ -7,10 +7,11 @@ const BlogContext = React.createContext()
 //receive a prop from a prop object right here called children ~ props.children
 export const BlogProvider = function({children}){
     // create a data set blogpost as an array of objects
-    const blogpost = [
-        {title:'BlogPost #1'},
-        {title:'BlogPost #2'}
-    ]
+    const [blogpost,setblogpost]=useState([])
+    //creating a helper function to set blog post
+    const addblogpost=function(){
+        setblogpost([...blogpost,{title:`BlogPost${blogpost.length+1}`}])
+    }
      /**
       * what is children ?
       * -----
@@ -27,7 +28,7 @@ export const BlogProvider = function({children}){
       * displaying inside of our application 
       */
      return(
-         <BlogContext.Provider value={blogpost}>
+         <BlogContext.Provider value={{data:blogpost,addblogpost:addblogpost}}>
              {children}
          </BlogContext.Provider>
      )

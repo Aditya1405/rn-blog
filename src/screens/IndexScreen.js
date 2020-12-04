@@ -8,7 +8,7 @@
  * import libraries
  */
 import React,{useContext} from 'react'
-import {Text, View, StyleSheet, FlatList} from 'react-native'
+import {Text, View, StyleSheet, FlatList, Button} from 'react-native'
 import BlogContext from '../context/BlogContext'
 
  /**
@@ -18,12 +18,14 @@ import BlogContext from '../context/BlogContext'
 const IndexScreen = function(){
     //using hook - useContext
     //this value is equal to the value provided in the blogcontext-blogprovider
-    const blogpost = useContext(BlogContext)
+    //now we are receiving a an array of objects and for that we need to destructuring
+    const {data,addblogpost} = useContext(BlogContext)
     return(
         <View>
             <Text>IndexScreen</Text>
+            <Button title="add post" onPress={function(){addblogpost()}}/>
             <FlatList
-                data={blogpost}
+                data={data}
                 keyExtractor={(k)=>k.title}
                 renderItem={function({item}){
                     return(
