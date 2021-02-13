@@ -13,13 +13,16 @@ import React from 'react'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import IndexScreen from './src/screens/IndexScreen'
+import ShowScreen from './src/screens/ShowScreen'
+import EditScreen from './src/screens/EditScreen'
 /**
  * why curly braces ?
  * because we exported blog provider as something called a named export.
  * So in other words we did not use the export default syntax.
  * So in order to import it we have to use those curly braces.
  */
-import {BlogProvider} from './src/context/BlogContext'
+import {Provider} from './src/context/BlogContext'
+import CreateScreen from './src/screens/CreateScreen';
  /**
  * task 2 
  * create a nav function
@@ -27,6 +30,9 @@ import {BlogProvider} from './src/context/BlogContext'
  */
 const navigator = createStackNavigator({
   Index:IndexScreen,
+  Show:ShowScreen,
+  Create:CreateScreen,
+  Edit:EditScreen
 },{
   InitialRouteName:'Index',
   defaultNavigationOptions:{
@@ -47,9 +53,9 @@ const App = createAppContainer(navigator)
 export default function(){
   // this returns jsx component so make sure to import react on top from react
   return(
-    <BlogProvider>
+    <Provider>
       <App/>
-    </BlogProvider>
+    </Provider>
   )
   /**
    * we are passing app in as the child to blog provider
